@@ -27,27 +27,27 @@ public class GuiResult extends JFrame {
         setLayout(null);
         setResizable(true);
 
-        ForwardPathsLabel = new JLabel("forwardPaths");
+        ForwardPathsLabel = new JLabel("Forward Paths");
         ForwardPathsGainLabel = new JLabel("");
         ForwardPathsGainLabel_body = new JTextPane();
         ForwardPathsLabel_body = new JTextPane();
         //ForwardPathsLabel_body.setBackground(Color.LIGHT_GRAY);
         //ForwardPathsGainLabel_body.setBackground(Color.LIGHT_GRAY);
 
-        loopsLabel = new JLabel("loops");
+        loopsLabel = new JLabel("Loops");
         loopsGainLabel = new JLabel("");  ///////////////////
         loopsGainLabel_body = new JTextPane();
         loopsLabel_body = new JTextPane();
         loopsLabel_body.setBackground(Color.LIGHT_GRAY);
         loopsGainLabel_body.setBackground(Color.LIGHT_GRAY);
 
-        nontouchLabel = new JLabel("nonTouching loops");
+        nontouchLabel = new JLabel("Non-Touching loops");
         nonTouchGainLabel = new JLabel("");  ////////////////////////
         nonTouchGainLabel_body = new JTextPane();
         nontouchLabel_body = new JTextPane();
         //nonTouchGainLabel_body.setBackground(Color.LIGHT_GRAY);
 
-        TransferFuncLabel = new JLabel("Trasfer func =   ");
+        TransferFuncLabel = new JLabel("Transfer function =   ");
         TransferFuncLabel_body = new JLabel();
 
         ForwardPathsLabel.setBounds(100, 0, 250, 40);
