@@ -19,17 +19,7 @@ public class InputExecution extends JFrame {
 
     private void initialize() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-     /*   Border blackline = BorderFactory.createLineBorder(Color.black);
-        JPanel panel = new JPanel();
-        LayoutManager layout = new FlowLayout();
-        panel.setLayout(layout);
-        JPanel panel1 = new JPanel();
-        String spaces = "inpppp";
-        panel1.add(new JLabel(spaces + "Border to JPanel" + spaces));
-        panel1.setBorder(blackline);
-        panel.add(panel1);
-        getContentPane().add(panel, BorderLayout.CENTER);
-*/
+
         JLabel k=new JLabel("Solving Signal FLow Graph");
         k.setFont(new Font("Algerian",Font.BOLD,32));
         k.setBounds(450,0,1000,40);
@@ -156,23 +146,24 @@ public class InputExecution extends JFrame {
         clearBTN.setFont(btnF);
         getContentPane().add(clearBTN);
 
-       /* solve_button.addActionListener(new ActionListener() {
+       solveBTN.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                Mason mason = new Mason();
+
+               Solver mason = new Solver();
                 mason.setSFG(NeedsData.segmentsGains);
                 NeedsData.forwardPaths = mason.getForwardPaths();
                 NeedsData.loops = mason.getLoops();
                 NeedsData.nonTouchingloops = mason.getNonTouchingLoops();
-                NeedsData.overAllTF = mason.getOvalAllTF();
                 NeedsData.loopsGain = mason.getLoopGains();
                 NeedsData.forwardPathsGain = mason.getForwardPathGains();
                 NeedsData.nonTouchingloopsGain = mason.getNonTouchingLoopGains();
+                NeedsData.overAllTF = mason.transferFn();
                 GuiResult result = new GuiResult();
                 result.setVisible(true);
             }
-        });*/
+        });
        nextBTN.addActionListener(new ActionListener() {
 
             @Override

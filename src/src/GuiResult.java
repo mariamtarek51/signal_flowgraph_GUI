@@ -65,8 +65,8 @@ public class GuiResult extends JFrame {
         nonTouchGainLabel.setBounds(1100, 0, 150, 40);
         nonTouchGainLabel_body.setBounds(1050, 40, 150, height - 200);
 
-        TransferFuncLabel.setBounds(20, height - 70, 250, 40);
-        TransferFuncLabel_body.setBounds(270, height - 70, 400, 40);
+        TransferFuncLabel.setBounds(20, height - 90, 350, 40);
+        TransferFuncLabel_body.setBounds(350, height - 90, 300, 40);
         Font font = new Font("TimesRoman", Font.BOLD, 32);
         TransferFuncLabel.setFont(font);
         TransferFuncLabel_body.setFont(font);
