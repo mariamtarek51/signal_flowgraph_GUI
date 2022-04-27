@@ -160,6 +160,7 @@ public class InputExecution extends JFrame {
                 NeedsData.forwardPathsGain = mason.getForwardPathGains();
                 NeedsData.nonTouchingloopsGain = mason.getNonTouchingLoopGains();
                 NeedsData.overAllTF = mason.transferFn();
+                NeedsData.smallDelta=mason.getforwardPathLoopDelta();
                 GuiResult result = new GuiResult();
                 result.setVisible(true);
             }

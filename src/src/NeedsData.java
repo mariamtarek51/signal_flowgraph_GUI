@@ -8,6 +8,8 @@ public class NeedsData {
     public static String[] nonTouchingloops;
     public static Double[] nonTouchingloopsGain;
     public static double[][] segmentsGains;
+    public static Double[] smallDelta;
+    public static double deltaDeno;
     public static double overAllTF;
 
 }

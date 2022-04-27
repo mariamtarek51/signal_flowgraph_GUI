@@ -1,5 +1,3 @@
-package flow;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +17,7 @@ public class Solver {
 	private ArrayList<ArrayList<Integer>> forwardPaths;
 	private ArrayList<boolean[]> forwardPathsMask;
 	private ArrayList<Double> forwardPathGains;
+	private ArrayList<Double> deltaa;
 
 	private ArrayList<ArrayList<Integer>> loops;
 	private ArrayList<boolean[]> loopsMask;
@@ -39,7 +38,7 @@ public class Solver {
 		nonTouchingLoopGains = new ArrayList<Double>();
 		forwardPathsMask = new ArrayList<boolean[]>();
 		loopsMask = new ArrayList<boolean[]>();
-
+		deltaa=new ArrayList<Double>();
 		generateFBAndLoops();
 		ArrayList<ArrayList<Integer>> loopLabels = new ArrayList<ArrayList<Integer>>();
 		for (int i = 0; i < loops.size(); i++) {
@@ -48,8 +47,8 @@ public class Solver {
 		}
 		generateNonTouching(loopLabels, 1);
 	}
- 
-//calculate gains
+
+	//calculate gains
 	private double calcGain(ArrayList<Integer> arr) {
 		double temp = 1;
 		if (arr.size() > 1) {
@@ -77,7 +76,7 @@ public class Solver {
 		}
 		return temp;
 	}
-	
+
 	private boolean isEquivalentLoop(boolean[] arr1, boolean[] arr2) {
 		for (int i = 0; i < arr1.length; i++) {
 			if (arr1[i] != arr2[i])
@@ -85,7 +84,7 @@ public class Solver {
 		}
 		return true;
 	}
-	
+
 	private boolean isLoopFound(ArrayList<Integer> arr) {
 		boolean[] loop = mapNodes(arr);
 		for (int i = 0; i < loops.size(); i++) {
@@ -112,7 +111,7 @@ public class Solver {
 		path.add(nodeNum);
 		visited[nodeNum] = true;
 		// forward path case
-		if (path.size() > 1 && nodeNum == numOfNodes - 1) {
+		if (path.size() > 1 && nodeNum == numOfNodes-1) {  /////-1
 			addToFP(new ArrayList<>(path));
 			return;
 		}
@@ -120,7 +119,7 @@ public class Solver {
 			if (segmentsGains[nodeNum][neighbour] != 0) {
 				if (!visited[neighbour]) {
 					FBAndLoops(path, visited, neighbour);
-					path.remove(path.size() - 1);
+					path.remove(path.size() -1); ////////////-1
 					visited[neighbour] = false;
 					// loop case
 				} else {
@@ -189,9 +188,9 @@ public class Solver {
 			gain *= loopGains.get(arr.get(j));
 		return gain;
 	}
-	
+
 	public Double[] getForwardPathGains() {
-		return forwardPathGains.toArray(new Double[forwardPathGains.size()]);  
+		return forwardPathGains.toArray(new Double[forwardPathGains.size()]);
 	}
 
 	public Double[] getLoopGains() {
@@ -201,9 +200,9 @@ public class Solver {
 	public Double[] getNonTouchingLoopGains() {
 		return nonTouchingLoopGains.toArray(new Double[nonTouchingLoopGains.size()]);
 	}
-	
+
 	/*
-	 * convert FPs, loops and nontouching loops into strings 
+	 * convert FPs, loops and nontouching loops into strings
 	 */
 	public String[] getForwardPaths() {
 		String fbString[] = new String[forwardPaths.size()];
@@ -217,7 +216,7 @@ public class Solver {
 		}
 		return fbString;
 	}
-	
+
 	public String[] getLoops() {
 		String loopsString[] = new String[loops.size()];
 		int itr = 0;
@@ -230,7 +229,7 @@ public class Solver {
 		}
 		return loopsString;
 	}
-	
+
 	public String[] getNonTouchingLoops() {
 		String[] temp = getLoops();
 		String nonString[] = new String[nonTouchingLoops.size()];
@@ -249,7 +248,7 @@ public class Solver {
 		return nonString;
 	}
 
-//calculate the transfer function
+	//calculate the transfer function
 	private boolean isNonTouchingWithFP(ArrayList<Integer> arr, int fbNum) {
 		int flag;
 		for (int i = 0; i < numOfNodes; i++) {
@@ -265,14 +264,8 @@ public class Solver {
 		}
 		return true;
 	}
-	
-	
-	
-	public void deltah(){
-		
-		
-	}
-	
+
+
 	public double transferFn() {
 		double current = 0;
 		double delta = 0;
@@ -281,18 +274,18 @@ public class Solver {
 		double delta3=0;
 		int opr = -1;
 		int nth = 1;
-		
+
 		Double [] tempDou = NeedsData.loopsGain;
 		for (int i = 0; i < tempDou.length; i++) {
-			delta1 += tempDou[i].doubleValue(); 
+			delta1 += tempDou[i].doubleValue();
 		}
-		
-	   tempDou =  NeedsData.nonTouchingloopsGain;
+
+	   /*tempDou =  NeedsData.nonTouchingloopsGain;
 		for (int i = 0; i < tempDou.length; i++) {
-			delta2 += tempDou[i].doubleValue(); 
-		}
-		
-		/*for (int i = 0; i < nonTouchingLoops.size(); i++) {
+			delta2 += tempDou[i].doubleValue();
+		}*/
+
+	/*	for (int i = 0; i < nonTouchingLoops.size(); i++) {
 			if (nonTouchingLoops.get(i).length == nth) {
 				current += nonTouchingLoopGains.get(i);
 			} else {
@@ -302,31 +295,41 @@ public class Solver {
 			}
 
 		}*/
-		
-		
-	/*	Double [] tempDou = NeedsData.loopsGain;  /////////////////////
-		for (int i = 0; i < tempDou.length; i++) {
-			delta1 += tempDou[i].doubleValue();
-		}*/
-		
-		
-	/*	tempDou = NeedsData.nonTouchingloopsGain;  //////////////////////////////////
-		for (int i = 0; i < tempDou.length; i++) {
-			if(nonTouchingLoops.get(i).length == nth) {
-			delta2 += tempDou[i].doubleValue() ;
-			}else {
-				delta3 += tempDou[i].doubleValue() ;;
-				//opr *= -1;
-				++nth;
-				
+
+		tempDou =  NeedsData.nonTouchingloopsGain;
+		String[] tempArr = NeedsData.nonTouchingloops;
+		int count=0;
+		for(int i=0 ; i<tempArr.length ; i++) {
+			count =tempArr[i].replaceAll("[^,]","").length();
+			if(count==1) {
+				delta2 += tempDou[i].doubleValue();
 			}
-		}*/
-	
-		
-		
+			else if(count==2) {
+				delta2 -= tempDou[i].doubleValue();
+			}
+			else if(count==3) {
+				delta2 += tempDou[i].doubleValue();
+			}
+			else if(count==4) {
+				delta2 -= tempDou[i].doubleValue();
+			}
+			else if(count==5) {
+				delta2 += tempDou[i].doubleValue();
+			}else if(count==6) {
+				delta2 -= tempDou[i].doubleValue();
+			}
+
+		}
+
+
+
+
+
+
 		delta = 1 - delta1 + delta2 ;      ///////////
 		//delta= 1 -delta;
-
+		//delta = 1 - delta1 - delta ;
+         NeedsData.deltaDeno=delta;
 		double numerator = 0;
 		double deltaN;
 
@@ -336,17 +339,26 @@ public class Solver {
 			opr = -1;
 			for (int j = 0; j < nonTouchingLoops.size(); j++) {
 				if (isNonTouchingWithFP(
-					new ArrayList<Integer>(Arrays.asList(nonTouchingLoops
-					.get(j))), i)) {
+						new ArrayList<Integer>(Arrays.asList(nonTouchingLoops
+								.get(j))), i)) {
 					current += opr * nonTouchingLoopGains.get(j);
 					opr *= -1;
 				} else
 					break;
 			}
 			deltaN += current;
-			numerator += deltaN * forwardPathGains.get(i);
+			if(deltaN != 1) {
+				deltaN= 1 + deltaN;
+			}
+			numerator += deltaN * forwardPathGains.get(i);  ///////
+			deltaa.add(deltaN);
+			System.out.println(deltaa.get(i));
 		}
 
+
 		return numerator / delta;
+	}
+	public Double[] getforwardPathLoopDelta() {
+		return deltaa.toArray(new Double[forwardPaths.size()]);
 	}
 }

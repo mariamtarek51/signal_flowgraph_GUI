@@ -31,6 +31,9 @@ public class GuiResult extends JFrame {
         ForwardPathsGainLabel = new JLabel("");
         ForwardPathsGainLabel_body = new JTextPane();
         ForwardPathsLabel_body = new JTextPane();
+        JLabel ForwardPathsDeltaLabel = new JLabel("");
+        JTextPane ForwardPathsDeltaLabel_body = new JTextPane();
+
         //ForwardPathsLabel_body.setBackground(Color.LIGHT_GRAY);
         //ForwardPathsGainLabel_body.setBackground(Color.LIGHT_GRAY);
 
@@ -50,12 +53,26 @@ public class GuiResult extends JFrame {
         TransferFuncLabel = new JLabel("Transfer function =   ");
         TransferFuncLabel_body = new JLabel();
 
-        ForwardPathsLabel.setBounds(100, 0, 250, 40);
+        JLabel DeltaLabel = new JLabel("Determinant of SFG (delta) =   ");
+        JLabel DeltaLabel_body = new JLabel();
+
+        ForwardPathsLabel.setBounds(100, 0, 450, 40);
         ForwardPathsLabel_body.setBounds(0, 40, 250, height - 200);
         ForwardPathsGainLabel.setBounds(300, 0, 150, 40);
         ForwardPathsGainLabel_body.setBounds(250, 40, 150, height - 200);
+        ForwardPathsDeltaLabel.setBounds(450, 0, 100, 40);
+        ForwardPathsDeltaLabel_body.setBounds(400, 40, 100, height - 200);
 
-        loopsLabel.setBounds(570, 0, 250, 40);
+        loopsLabel.setBounds(500, 0, 250, 40);
+        loopsLabel_body.setBounds(500, 40, 250, height - 200);
+        loopsGainLabel.setBounds(800, 0, 100, 40);
+        loopsGainLabel_body.setBounds(750, 40, 100, height - 200);
+
+        nontouchLabel.setBounds(850, 0, 250, 40);
+        nontouchLabel_body.setBounds(850, 40, 250, height - 200);
+        nonTouchGainLabel.setBounds(1150, 0, 150, 40);
+        nonTouchGainLabel_body.setBounds(1100, 40, 150, height - 200);
+       /* loopsLabel.setBounds(570, 0, 250, 40);
         loopsLabel_body.setBounds(400, 40, 250, height - 200);
         loopsGainLabel.setBounds(700, 0, 150, 40);
         loopsGainLabel_body.setBounds(650, 40, 150, height - 200);
@@ -63,7 +80,7 @@ public class GuiResult extends JFrame {
         nontouchLabel.setBounds(900, 0, 250, 40);
         nontouchLabel_body.setBounds(800, 40, 250, height - 200);
         nonTouchGainLabel.setBounds(1100, 0, 150, 40);
-        nonTouchGainLabel_body.setBounds(1050, 40, 150, height - 200);
+        nonTouchGainLabel_body.setBounds(1050, 40, 150, height - 200);*/
 
         TransferFuncLabel.setBounds(20, height - 90, 350, 40);
         TransferFuncLabel_body.setBounds(350, height - 90, 300, 40);
@@ -71,6 +88,10 @@ public class GuiResult extends JFrame {
         TransferFuncLabel.setFont(font);
         TransferFuncLabel_body.setFont(font);
 
+        DeltaLabel.setBounds(20, height - 120, 550, 40);
+        DeltaLabel_body.setBounds(550, height - 120, 300, 40);
+        DeltaLabel.setFont(font);
+        DeltaLabel_body.setFont(font);
         font = new Font("TimesRoman", Font.BOLD, 22);
 
         loopsLabel.setFont(font);
@@ -83,17 +104,21 @@ public class GuiResult extends JFrame {
         getContentPane().add(loopsLabel);
         getContentPane().add(ForwardPathsLabel);
         getContentPane().add(TransferFuncLabel);
+        getContentPane().add(DeltaLabel);
         getContentPane().add(nontouchLabel);
         getContentPane().add(loopsGainLabel);
         getContentPane().add(ForwardPathsGainLabel);
+        getContentPane().add(ForwardPathsDeltaLabel);
         getContentPane().add(nonTouchGainLabel);
 
         getContentPane().add(loopsLabel_body);
         getContentPane().add(ForwardPathsLabel_body);
         getContentPane().add(TransferFuncLabel_body);
+        getContentPane().add(DeltaLabel_body);
         getContentPane().add(nontouchLabel_body);
         getContentPane().add(loopsGainLabel_body);
         getContentPane().add(ForwardPathsGainLabel_body);
+        getContentPane().add(ForwardPathsDeltaLabel_body);
         getContentPane().add(nonTouchGainLabel_body);
 
 
@@ -109,6 +134,17 @@ public class GuiResult extends JFrame {
         ForwardPathsLabel_body.setEditable(false);
         ForwardPathsLabel_body.setText(sb.toString());
         //ForwardPathsLabel_body.setForeground(Color.blue);
+
+        sb = new StringBuilder();
+        sb.append("<font size=\"5\">");
+        Double [] tempDo = NeedsData.smallDelta;
+        for (int i = 0; i < tempDo.length; i++)
+            sb.append( "&#9651;"+ (i+1) +"= " + tempDo[i].doubleValue() + "<br>");
+        sb.append("</font>");
+
+        ForwardPathsDeltaLabel_body.setContentType("text/html");
+        ForwardPathsDeltaLabel_body.setEditable(false);
+        ForwardPathsDeltaLabel_body.setText(sb.toString());
 
         sb = new StringBuilder();
         sb.append("<font size=\"5\">");
@@ -165,7 +201,7 @@ public class GuiResult extends JFrame {
         nonTouchGainLabel_body.setText(sb.toString());
 
         TransferFuncLabel_body.setText(NeedsData.overAllTF + "");
-
+        DeltaLabel_body.setText(NeedsData.deltaDeno+ "");
     }
 
     GuiResult() {
