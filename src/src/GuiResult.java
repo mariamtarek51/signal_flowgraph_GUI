@@ -1,3 +1,5 @@
+package flow;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -31,18 +33,15 @@ public class GuiResult extends JFrame {
         JLabel ForwardPathsDeltaLabel = new JLabel("");
         JTextPane ForwardPathsDeltaLabel_body = new JTextPane();
 
-        //ForwardPathsLabel_body.setBackground(Color.LIGHT_GRAY);
-        //ForwardPathsGainLabel_body.setBackground(Color.LIGHT_GRAY);
-
         loopsLabel = new JLabel("Loops");
-        loopsGainLabel = new JLabel("");  ///////////////////
+        loopsGainLabel = new JLabel("");  
         loopsGainLabel_body = new JTextPane();
         loopsLabel_body = new JTextPane();
         loopsLabel_body.setBackground(Color.LIGHT_GRAY);
         loopsGainLabel_body.setBackground(Color.LIGHT_GRAY);
 
         nontouchLabel = new JLabel("Non-Touching loops");
-        nonTouchGainLabel = new JLabel("");  ////////////////////////
+        nonTouchGainLabel = new JLabel(""); 
         nonTouchGainLabel_body = new JTextPane();
         nontouchLabel_body = new JTextPane();
         //nonTouchGainLabel_body.setBackground(Color.LIGHT_GRAY);
@@ -52,7 +51,8 @@ public class GuiResult extends JFrame {
 
         JLabel DeltaLabel = new JLabel("Determinant of SFG (delta) =   ");
         JLabel DeltaLabel_body = new JLabel();
-
+        
+        //this part to set bounds to the view in the results
         ForwardPathsLabel.setBounds(100, 0, 450, 40);
         ForwardPathsLabel_body.setBounds(0, 40, 250, height - 200);
         ForwardPathsGainLabel.setBounds(300, 0, 150, 40);
@@ -69,15 +69,7 @@ public class GuiResult extends JFrame {
         nontouchLabel_body.setBounds(850, 40, 250, height - 200);
         nonTouchGainLabel.setBounds(1150, 0, 150, 40);
         nonTouchGainLabel_body.setBounds(1100, 40, 150, height - 200);
-       /* loopsLabel.setBounds(570, 0, 250, 40);
-        loopsLabel_body.setBounds(400, 40, 250, height - 200);
-        loopsGainLabel.setBounds(700, 0, 150, 40);
-        loopsGainLabel_body.setBounds(650, 40, 150, height - 200);
-
-        nontouchLabel.setBounds(900, 0, 250, 40);
-        nontouchLabel_body.setBounds(800, 40, 250, height - 200);
-        nonTouchGainLabel.setBounds(1100, 0, 150, 40);
-        nonTouchGainLabel_body.setBounds(1050, 40, 150, height - 200);*/
+    
 
         TransferFuncLabel.setBounds(20, height - 90, 350, 40);
         TransferFuncLabel_body.setBounds(350, height - 90, 300, 40);
@@ -119,7 +111,7 @@ public class GuiResult extends JFrame {
         getContentPane().add(nonTouchGainLabel_body);
 
 
-        // populating bodies
+        // this part to print results in the view
         StringBuilder sb = new StringBuilder();
         sb.append("<font size=\"5\">");
         String[] tempArr = NeedsData.forwardPaths;
