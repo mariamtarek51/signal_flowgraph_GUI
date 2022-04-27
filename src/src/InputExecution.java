@@ -107,6 +107,7 @@ public class InputExecution extends JFrame {
         drawPanel.setBackground(Color.lightGray);
         getContentPane().add(drawPanel);
 
+        //buttons
         nextBTN = new JButton("Next");
         nextBTN.setBounds(15, 320, 100, 50);
         nextBTN.setFont(btnF);
@@ -118,6 +119,7 @@ public class InputExecution extends JFrame {
         solveBTN.setBounds(120, 320, 120, 50);
         getContentPane().add(solveBTN);
 
+        //deletion
         guide=new JLabel("<html>If you want to delete <br> drawn edge.Determine its:</html>");
         guide.setFont(new Font("Calibri",Font.BOLD,21));
         guide.setBounds(9,420,300,50);
@@ -150,7 +152,7 @@ public class InputExecution extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-
+             //setting data
                Solver mason = new Solver();
                 mason.setSFG(NeedsData.segmentsGains);
                 NeedsData.forwardPaths = mason.getForwardPaths();
@@ -166,7 +168,7 @@ public class InputExecution extends JFrame {
             }
         });
        nextBTN.addActionListener(new ActionListener() {
-
+         //error cases in next button and its execution
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 if (!isNumeric(startT.getText())) {
@@ -181,7 +183,11 @@ public class InputExecution extends JFrame {
                     WarningScreen errView = new WarningScreen(
                             "Segment gain, Invalid numeric value!");
                     errView.setVisible(true);
-                } else {
+                }else if (gainT.getText().isEmpty()||endT.getText().isEmpty()||startT.getText().isEmpty()){
+                    WarningScreen err=new WarningScreen("Enter the missing value !");
+                    err.setVisible(true);
+                }
+                else {
                     int n1 = Integer.parseInt(startT.getText()), n2 = Integer
                             .parseInt(endT.getText());
                     if (n1 > NeedsData.numOfNodes || n2 >NeedsData.numOfNodes) {
@@ -196,7 +202,11 @@ public class InputExecution extends JFrame {
                         WarningScreen errView = new WarningScreen(
                                 "No feedback allowed to node 1");
                         errView.setVisible(true);
-                    } else {
+                    }else if(n1==NeedsData.numOfNodes){
+                        WarningScreen err=new WarningScreen("No outcoming branches allowed from sink node");
+                        err.setVisible(true);
+                    }
+                    else {
                         double g = Double.parseDouble(gainT.getText());
                         NeedsData.segmentsGains[n1 - 1][n2 - 1] = g;
                         drawPanel.repaint();
@@ -209,7 +219,7 @@ public class InputExecution extends JFrame {
         });
 
         clearBTN.addActionListener(new ActionListener() {
-
+            //error cases in clear button
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 if (!isNumeric(clear1T.getText())) {

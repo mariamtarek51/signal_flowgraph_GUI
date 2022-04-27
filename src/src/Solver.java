@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Solver {
-	public static double delta;
 
 	private double[][] segmentsGains;
 	private int numOfNodes;
@@ -301,21 +300,10 @@ public class Solver {
 		int count=0;
 		for(int i=0 ; i<tempArr.length ; i++) {
 			count =tempArr[i].replaceAll("[^,]","").length();
-			if(count==1) {
+			if(count%2==1) {
 				delta2 += tempDou[i].doubleValue();
 			}
-			else if(count==2) {
-				delta2 -= tempDou[i].doubleValue();
-			}
-			else if(count==3) {
-				delta2 += tempDou[i].doubleValue();
-			}
-			else if(count==4) {
-				delta2 -= tempDou[i].doubleValue();
-			}
-			else if(count==5) {
-				delta2 += tempDou[i].doubleValue();
-			}else if(count==6) {
+			else  {
 				delta2 -= tempDou[i].doubleValue();
 			}
 
@@ -341,14 +329,16 @@ public class Solver {
 				if (isNonTouchingWithFP(
 						new ArrayList<Integer>(Arrays.asList(nonTouchingLoops
 								.get(j))), i)) {
-					current += opr * nonTouchingLoopGains.get(j);
-					opr *= -1;
+					current +=  nonTouchingLoopGains.get(j);
+					//opr *= -1;
 				} else
 					break;
 			}
 			deltaN += current;
+			System.out.println(deltaN);
 			if(deltaN != 1) {
-				deltaN= 1 + deltaN;
+				deltaN= 1 - deltaN;
+				System.out.println(deltaN);
 			}
 			numerator += deltaN * forwardPathGains.get(i);  ///////
 			deltaa.add(deltaN);

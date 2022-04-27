@@ -9,9 +9,6 @@ import javax.swing.JTextPane;
 
 public class GuiResult extends JFrame {
 
-    private static final long serialVersionUID = 2L;
-
-
     public void init() {
 
         JLabel loopsLabel, ForwardPathsLabel , TransferFuncLabel , nontouchLabel, loopsGainLabel, ForwardPathsGainLabel, nonTouchGainLabel, TransferFuncLabel_body;
@@ -88,8 +85,8 @@ public class GuiResult extends JFrame {
         TransferFuncLabel.setFont(font);
         TransferFuncLabel_body.setFont(font);
 
-        DeltaLabel.setBounds(20, height - 120, 550, 40);
-        DeltaLabel_body.setBounds(550, height - 120, 300, 40);
+        DeltaLabel.setBounds(20, height - 120, 500, 40);
+        DeltaLabel_body.setBounds(500, height - 120, 300, 40);
         DeltaLabel.setFont(font);
         DeltaLabel_body.setFont(font);
         font = new Font("TimesRoman", Font.BOLD, 22);

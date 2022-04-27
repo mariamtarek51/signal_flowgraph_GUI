@@ -5,10 +5,6 @@ import javax.swing.JLabel;
 
 public class WarningScreen extends JFrame {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
     private JLabel label;
 
     WarningScreen(String str) {
